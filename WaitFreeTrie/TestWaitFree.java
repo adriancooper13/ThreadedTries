@@ -1,9 +1,9 @@
 import java.util.*;
 import java.io.*;
 
-public class TestOptimistic {
+public class TestWaitFree {
     public static void main (String[] args) throws Exception {
-        OptimisticTrie test = new OptimisticTrie();
+        WaitFreeTrie test = new WaitFreeTrie();
 
         Scanner scan = new Scanner(new File("dict.txt"));
         ArrayList<String> dict = new ArrayList<>();

@@ -1,10 +1,10 @@
-public class OptimisticTrie {
+public class WaitFreeTrie {
 
     static final int ALPHA_SIZE = 26;
     TrieNode root;
     int size;
 
-    public OptimisticTrie() {
+    public WaitFreeTrie() {
         size = 0;
         root = new TrieNode();
     }

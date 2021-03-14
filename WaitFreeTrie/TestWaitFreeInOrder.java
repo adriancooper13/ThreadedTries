@@ -3,7 +3,7 @@ import java.io.File;
 
 class DifferentTrieThread extends Thread {
 
-    public static final OptimisticTrie root = new OptimisticTrie();
+    public static final WaitFreeTrie root = new WaitFreeTrie();
     public Operation op;
     public String s;
 
@@ -42,7 +42,7 @@ class DifferentTrieThread extends Thread {
 }
 
 
-public class TestOptimisticInOrder {
+public class TestWaitFreeInOrder {
 
     public static void main(String[] args) throws Exception {
 

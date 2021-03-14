@@ -7,7 +7,7 @@ enum Operation {
 
 class TrieThread extends Thread {
 
-    public static final OptimisticTrie root = new OptimisticTrie();
+    public static final WaitFreeTrie root = new WaitFreeTrie();
     public Operation op;
     public String s;
 
@@ -24,7 +24,7 @@ class TrieThread extends Thread {
                 break;
             case remove:
                 res = root.remove(s);
-                if (res) TestOptimisticWithRandom.deletes += 1;
+                if (res) TestWaitFreeWithRandom.deletes += 1;
                 break;
             case search:
                 res = root.search(s);
@@ -49,7 +49,7 @@ class TrieThread extends Thread {
     }
 }
 
-public class TestOptimisticWithRandom {
+public class TestWaitFreeWithRandom {
 
     public static int deletes = 0;
 

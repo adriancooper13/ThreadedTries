@@ -1,4 +1,4 @@
-package all_tests;
+package Tries;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

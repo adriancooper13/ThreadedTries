@@ -1,3 +1,4 @@
+package Tries;
 public class WaitFreeTrie extends Trie {
 
     static final int ALPHA_SIZE = 26;

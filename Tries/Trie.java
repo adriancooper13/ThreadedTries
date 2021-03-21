@@ -1,3 +1,4 @@
+package Tries;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Trie {

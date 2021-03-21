@@ -1,11 +1,13 @@
-public class WaitFreeTrie {
+package tries;
+
+import tries.*;
+
+public class WaitFreeTrie extends Trie {
 
     static final int ALPHA_SIZE = 26;
     TrieNode root;
-    int size;
 
     public WaitFreeTrie() {
-        size = 0;
         root = new TrieNode();
     }
 
@@ -19,11 +21,7 @@ public class WaitFreeTrie {
         }
     }
 
-    public int size() {
-        return size;
-    }
-
-    public boolean insert(String key) {
+    public boolean add(String key) {
         int len = key.length();
         TrieNode current = root;
 
@@ -39,14 +37,14 @@ public class WaitFreeTrie {
 
         if (!current.flag) {
             current.flag = true;
-            size += 1;
+            size.getAndIncrement();
             return true;
         }
 
         return false;
     }
 
-    public boolean search(String key) {
+    public boolean contains(String key) {
         int len = key.length();
         TrieNode current = root;
 
@@ -79,7 +77,7 @@ public class WaitFreeTrie {
 
         if (current.flag) {
             current.flag = false;
-            size -= 1;
+            size.getAndDecrement();
             return true;
         }
 

@@ -1,3 +1,6 @@
+package tries;
+
+import tries.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,14 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class OptimisticTrie {
+public class OptimisticTrie extends Trie {
     
     private Node root;
-    private AtomicInteger size;
+    // private AtomicInteger size;
 
     public OptimisticTrie() {
         root = new Node();
-        size = new AtomicInteger(0);
     }
 
     public OptimisticTrie(Collection<String> c) {
@@ -126,34 +128,5 @@ public class OptimisticTrie {
         
         size.getAndDecrement();
         return true;
-    }
-
-    public int size() {
-        return size.get();
-    }
-
-    @Override
-    public String toString() {
-        ArrayList<String> words = new ArrayList<>(size.get());
-        getAll(root, new StringBuilder(), words);
-        Collections.sort(words);
-        return words.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        OptimisticTrie other = (OptimisticTrie)o;
-        return (toString().equals(other.toString()));
-    }
-
-    private void getAll(Node current, StringBuilder str, ArrayList<String> words) {
-        if (current == null) return;
-        if (current.isWord.get()) words.add(str.toString());
-
-        for (Map.Entry<Character, Node> e : current.children.entrySet()) {
-            str.append(e.getKey());
-            getAll(e.getValue(), str, words);
-            str.deleteCharAt(str.length() - 1);
-        }
     }
 }

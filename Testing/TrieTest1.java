@@ -1,16 +1,20 @@
-import all_tests.*;
+package testing;
+
+import testing.all_tests.*;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import tries.*;
 
 public class TrieTest1 {
 
     public static void main(String[] args) throws Exception {
         
         // Read file and put all the words in the hashmaps
-        Scanner input = new Scanner(new File("all_tests/engmix.txt"));
+        Scanner input = new Scanner(new File("testing/all_tests/engmix.txt"));
         for (int i = 0; input.hasNextLine(); i++) {
             String s = input.nextLine();
             TrieThread.words.put(i, s);
@@ -25,12 +29,14 @@ public class TrieTest1 {
         for (int i = 0; i < pairs.length; i++)
             pairs[i] = new Pair(rand.nextInt(3), rand.nextInt(NUM_WORDS));
 
-        StringBuilder json = new StringBuilder();
-        String[] versions = {"Optimistic", "FineGrain", "WaitFree"};
-
-        // Run test case for each version of the trie.
+            String[] versions = args.clone();
+            
+            // Run test case for each version of the trie.
         for (String version : versions) {
 
+            StringBuilder json = new StringBuilder();
+                
+            System.out.println();
             System.out.println("Testing " + version + "Trie with " + pairs.length + " operations");
             System.out.println("==============================");
         
@@ -69,10 +75,11 @@ public class TrieTest1 {
 
                 // Finish creating the json object with the execution time.
                 json.append("time").append(" : ").append(end - start);
-            }
 
+            }
+            
             // Create output file and write json object to it.
-            PrintWriter output = new PrintWriter(new File("json.txt"));
+            PrintWriter output = new PrintWriter(new File(version + "json.txt"));
             output.println(json);
             output.close();
         }

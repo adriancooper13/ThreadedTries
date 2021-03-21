@@ -1,4 +1,4 @@
-package all_tests;
+package testing.all_tests;
 
 public enum Operation {
     add, remove, contains

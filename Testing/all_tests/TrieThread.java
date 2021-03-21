@@ -1,7 +1,8 @@
-package all_tests;
+package testing.all_tests;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import tries.*;
 
 public class TrieThread extends Thread {
 
@@ -21,9 +22,9 @@ public class TrieThread extends Thread {
                 case "Optimistic":
                     trie = new OptimisticTrie();
                     break;
-                case "FineGrain":
-                    trie = new FineGrainedTrie();
-                    break;
+                // case "FineGrain":
+                //     trie = new FineGrainTrie();
+                //     break;
                 case "WaitFree":
                     trie = new WaitFreeTrie();
                     break;

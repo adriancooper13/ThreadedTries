@@ -1,3 +1,6 @@
+package tries;
+
+import tries.*;
 import java.util.*;
 import java.util.concurrent.locks.*;
 

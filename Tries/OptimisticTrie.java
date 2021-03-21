@@ -1,5 +1,6 @@
-package Tries;
+package tries;
 
+import tries.*;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -127,34 +128,5 @@ public class OptimisticTrie extends Trie {
         
         size.getAndDecrement();
         return true;
-    }
-
-    // public int size() {
-    //     return size.get();
-    // }
-
-    @Override
-    public String toString() {
-        ArrayList<String> words = new ArrayList<>(size.get());
-        getAll(root, new StringBuilder(), words);
-        Collections.sort(words);
-        return words.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        OptimisticTrie other = (OptimisticTrie)o;
-        return (toString().equals(other.toString()));
-    }
-
-    private void getAll(Node current, StringBuilder str, ArrayList<String> words) {
-        if (current == null) return;
-        if (current.isWord.get()) words.add(str.toString());
-
-        for (Map.Entry<Character, Node> e : current.children.entrySet()) {
-            str.append(e.getKey());
-            getAll(e.getValue(), str, words);
-            str.deleteCharAt(str.length() - 1);
-        }
     }
 }

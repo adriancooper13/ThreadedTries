@@ -8,10 +8,13 @@ import sys
 
 TEST_DIR = "testing/"
 TRIES_DIR = "tries/"
+GRAPH_DIR = "graphs/"
 JSON_FILENAME = "json.txt"
 VERSIONS = ["Optimistic", "WaitFree"]
 
-# Get number of command line arguments (line C).
+test_cases = 0
+
+# Get number of command line arguments (like C).
 argv = sys.argv
 argc = len(argv)
 
@@ -44,13 +47,13 @@ while True:
 
     # If we make it here, the program compiled successfully.
     # Get the number of test cases and run all of them. Default is 10 testcases.
-    TEST_CASES = 10 if argc < 3 or not argv[2].isdigit() else int(argv[2])
+    test_cases = 10 if argc < 3 or not argv[2].isdigit() else int(argv[2])
 
     # Create empty dictionary of dictionaries.
     thread_times = {version : {} for version in VERSIONS}
 
     # For each test case, run the test then read the output file.
-    for i in range(TEST_CASES):
+    for i in range(test_cases):
         # Run testcase.
         run = f"java {FILEPATH}"
         for version in VERSIONS:
@@ -87,7 +90,7 @@ while True:
     for version in VERSIONS:
         # Get all the averages for thread times.
         for key in thread_times[version]:
-            thread_times[version][key] /= TEST_CASES
+            thread_times[version][key] /= test_cases
 
 
     # Clean up the mess I made.
@@ -115,5 +118,11 @@ while True:
         ax.plot(x, y, label=version)
 
     ax.legend()
-    fig.savefig("graph.png")
+
+    test_cases = str(test_cases)
+    if not os.path.exists(GRAPH_DIR + test_cases):
+        os.mkdir(GRAPH_DIR + test_cases)
+
+    nextfile = len(os.listdir(GRAPH_DIR + test_cases)) + 1
+    fig.savefig(f"{GRAPH_DIR}{test_cases}/graph{nextfile}.png")
     # plt.scatter(x, y) 

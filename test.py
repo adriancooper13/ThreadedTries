@@ -107,7 +107,7 @@ while True:
 
     plt.xticks(np.arange(
                 start=0, 
-                stop=thread_times[VERSIONS[0]][max(thread_times[VERSIONS[0]], key=int)] + 1, 
+                stop=thread_times[VERSIONS[0]][max(thread_times[VERSIONS[0]].keys())] + 1, 
                 step=5
     ))
 

@@ -1,25 +1,24 @@
-package tries;
-
-import tries.*;
 import java.util.*;
 import java.util.concurrent.locks.*;
 
 // This is a fine-grained trie data structure, it only has add, contains, remove, and size methods
-public class TrieFineGrained extends Trie
+public class TrieFineGrained
 {
 	private Node root;
+	private int size;
 
 	// constructer for this class, creats a root node and sets the size to zero
 	public TrieFineGrained()
 	{
 		root = new Node();
+		size = 0;
 	}
 
 	// This adds a word s to the trie and increases the size, it locks and unlocks hand-over-hand fasion
 	public boolean add(String s)
 	{
 		Node current = root;
-		int len = s.length();
+		len = s.length();
 		Lock[] keyring = new Lock[2];
 
 		// adds one char at a time to trie
@@ -31,12 +30,15 @@ public class TrieFineGrained extends Trie
 				current.addNode(c);
 
 			// provents unlocking of a non-existing lock
-			if (keyring[i % 2] != null)
+			if (keyring[i % 2] != NULL)
 				keyring[i % 2].unlock();
 	
 			keyring[i % 2] = current.getlock();
 			current = current.getNextNode(c);
 		}
+
+		if (current.isWord()) 
+			return false;	
 
 		current.setIsWord(true);
 
@@ -45,7 +47,7 @@ public class TrieFineGrained extends Trie
 			l.unlock();	
 		}
 
-		size.getAndIncrement();
+		size++;
 		return true;
 	}
 
@@ -54,7 +56,7 @@ public class TrieFineGrained extends Trie
 	public boolean contains(String s)
 	{
 		Node current = root;
-		int len = s.length();
+		len = s.length();
 
 		for (int i = 0; i < len; i++) 
 		{
@@ -72,7 +74,7 @@ public class TrieFineGrained extends Trie
 	public boolean remove(String s)
 	{
 		Node current = root;
-		int len = s.length();
+		len = s.length();
 		Lock[] keyring = new Lock[2];
 
 		for (int i = 0; i < len; i++) 
@@ -96,9 +98,9 @@ public class TrieFineGrained extends Trie
 			l.unlock();	
 		}
 
-		size.getAndDecrement();
+		size--;
 		// This cleans any pieces of the left over trie so there is no reduntent space
-		cleanup(s);
+		cleanup(String s);
 
 		return true;
 	}
@@ -107,7 +109,7 @@ public class TrieFineGrained extends Trie
 	private void cleanup(String s)
 	{
 		Node current = root;
-		int len = s.length();
+		len = s.length();
 		Lock[] keyring = new Lock[2];
 
 		// This looks at all layers of the word that was deleted for throughness

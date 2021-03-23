@@ -13,6 +13,8 @@ JSON_FILENAME = "json.txt"
 VERSIONS = ["Optimistic", "WaitFree"]
 
 test_cases = 0
+x_ticks = [x for x in range(0, 36, 5)]
+y_ticks = [y for y in range(0, 801, 200)]
 
 # Get number of command line arguments (like C).
 argv = sys.argv
@@ -77,8 +79,8 @@ while True:
                 time = int(json_elements[1][colon+1:])
 
                 # Put time in dictionary.
-                if num_threads in thread_times:
-                    thread_times[version][num_threads] = thread_times[num_threads] + time
+                if num_threads in thread_times[version]:
+                    thread_times[version][num_threads] = thread_times[version][num_threads] + time
                 else:
                     thread_times[version][num_threads] = time
             
@@ -92,7 +94,6 @@ while True:
         for key in thread_times[version]:
             thread_times[version][key] /= test_cases
 
-
     # Clean up the mess I made.
     os.system(f"rm {TEST_DIR}*.class")
     os.system(f"rm {TRIES_DIR}*.class")
@@ -105,16 +106,12 @@ while True:
     ax.set_xlabel("Number of Threads")
     ax.set_ylabel("Runtime (milliseconds)")
 
-    plt.xticks(np.arange(
-                start=0, 
-                stop=thread_times[VERSIONS[0]][max(thread_times[VERSIONS[0]].keys())] + 1, 
-                step=5
-    ))
+    ax.set_xticks(x_ticks)
+    ax.set_yticks(y_ticks)
 
+    x = np.array([key for key in thread_times[VERSIONS[0]]])
     for version in VERSIONS:
-        x = np.array([key for key in thread_times[version]])
         y = np.array([thread_times[version][key] for key in thread_times[version]])
-
         ax.plot(x, y, label=version)
 
     ax.legend()
@@ -125,4 +122,3 @@ while True:
 
     nextfile = len(os.listdir(GRAPH_DIR + test_cases)) + 1
     fig.savefig(f"{GRAPH_DIR}{test_cases}/graph{nextfile}.png")
-    # plt.scatter(x, y) 

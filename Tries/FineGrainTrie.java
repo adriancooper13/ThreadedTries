@@ -5,12 +5,12 @@ import java.util.*;
 import java.util.concurrent.locks.*;
 
 // This is a fine-grained trie data structure, it only has add, contains, remove, and size methods
-public class TrieFineGrained extends Trie
+public class FineGrainTrie extends Trie
 {
 	private Node root;
 
 	// constructer for this class, creats a root node and sets the size to zero
-	public TrieFineGrained()
+	public FineGrainTrie()
 	{
 		root = new Node();
 	}
@@ -151,7 +151,7 @@ public class TrieFineGrained extends Trie
 
 	public int size()
 	{
-		return size;
+		return size.get();
 	}
 }
 

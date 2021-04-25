@@ -1,16 +1,91 @@
-package tries;
 
-import tries.*;
 import java.util.*;
 import java.util.concurrent.locks.*;
+import java.io.*;
+
+
+public class testing
+{
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(new File("testing/all_tests/engmix.txt"));
+        ArrayList<String> dic = new ArrayList<String>();
+
+        for (int i = 0; input.hasNextLine(); i++) 
+        {
+            String s = input.nextLine();
+            dic.add(s);
+        }
+        input.close();
+
+        int length = dic.size();
+
+        System.out.println("There are a total of " + length + " in the engmix.txt.");
+
+        ArrayList<String> dicEven = new ArrayList<String>();
+        ArrayList<String> dicOdd = new ArrayList<String>();
+
+        for (int i = 0; i < length; i++) 
+        {
+        	if (i % 2 == 0) 
+        	{
+        		dicEven.add(dic.get(i));	
+        	}
+        	else
+        	{
+        		dicOdd.add(dic.get(i));	
+        	}
+        }
+
+        System.out.println("In dicEven there is " + dicEven.size() + " words.");
+        System.out.println("In dicOdd there is " + dicOdd.size() + " words.");
+
+
+        Thread thread[] = new Thread[2]; // only 10 guests
+        TrieFineGrained trieDic = new TrieFineGrained();
+
+
+    	thread[1] = new Thread(new adding(trieDic, dicEven), "dicEven");
+    	thread[2] = new Thread(new adding(trieDic, dicOdd), "dicOdd");
+
+    	thread[1].start();
+    	thread[2].start();
+
+    	while(thread[1].isAlive() || thread[2].isAlive());
+
+	}
+}
+
+class adding implements Runnable
+{
+   private TrieFineGrained trieDic;
+   private ArrayList<String> myDic;
+ 
+   public adding(TrieFineGrained trieDic, ArrayList<String> myDic)
+   {
+      this.trieDic = trieDic;
+      this.myDic = myDic;
+   }
+
+   public void run()
+   {
+   		for (String word: myDic) 
+   		{
+   			trieDic.add(word);
+   		}
+
+   		System.out.println(Thread.currentThread().getName() + " is done adding to the trie.");
+   }
+}
+
 
 // This is a fine-grained trie data structure, it only has add, contains, remove, and size methods
-public class FineGrainTrie extends Trie
+class TrieFineGrained
 {
 	private Node root;
 
 	// constructer for this class, creats a root node and sets the size to zero
-	public FineGrainTrie()
+	public TrieFineGrained()
 	{
 		root = new Node();
 	}
@@ -151,7 +226,7 @@ public class FineGrainTrie extends Trie
 
 	public int size()
 	{
-		return size.get();
+		return size;
 	}
 }
 
@@ -235,4 +310,5 @@ class Node
 	{
 		alpha[c - 'a'] = null;
 	}
+
 }

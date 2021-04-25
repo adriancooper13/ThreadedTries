@@ -10,7 +10,7 @@ TEST_DIR = "testing/"
 TRIES_DIR = "tries/"
 GRAPH_DIR = "graphs/"
 JSON_FILENAME = "json.txt"
-VERSIONS = ["Optimistic", "WaitFree"]
+VERSIONS = ["Optimistic", "WaitFree", "FineGrain"]
 
 test_cases = 0
 x_ticks = [x for x in range(0, 36, 5)]

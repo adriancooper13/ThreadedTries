@@ -17,4 +17,11 @@ This trie uses a hand over hand locking mechanism to ensure thread safety across
 
 ### Testing
 
-As of now, the Fine-Grain trie has not been tested. However, both the Optimistic and Lock-Free tries are being tested and compared in the same enviornment with the differences shown in the graph directory.
+All three implementations are tested using the TrieTest1.java within the testing directory. This test creates a random number of operations to be performed between 100,000 and 500,000. It then randomly selects which operations get performed and in what order, and this selection will be the same for all three implementations.
+
+# How to Run
+
+In order to run the test case, you can open the Jupyter Notebook file and just run all cells.
+
+** PLEASE NOTE **
+The Jupyter Notebook does make some system calls within the the ThreadedTries directory. If you are not okay with this happening on your machine, you can either run it on a VM or just look at the last run currently in the notebook.

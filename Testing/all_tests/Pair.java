@@ -18,4 +18,9 @@ public class Pair {
         }
         this.index = index;
     }
+
+    @Override
+    public String toString() {
+        return "Operation: " + op + ", Index: " + index + String.format("%n");
+    }
 }

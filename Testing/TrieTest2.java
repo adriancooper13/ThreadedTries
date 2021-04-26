@@ -9,7 +9,7 @@ import java.util.Scanner;
 import testing.all_tests.*;
 import tries.*;
 
-public class TrieTest1 {
+public class TrieTest2 {
 
     public static void main(String[] args) throws Exception {
         
@@ -24,12 +24,15 @@ public class TrieTest1 {
         final int NUM_WORDS = TrieThread.words.size();
         
         // Get random number of operations.
-        Random rand = new Random();
-        Pair[] pairs = new Pair[rand.nextInt(400_000) + 100_000];
-        for (int i = 0; i < pairs.length; i++)
-            pairs[i] = new Pair(rand.nextInt(3), rand.nextInt(NUM_WORDS));
+        // Random rand = new Random();
+        Pair[] pairs = new Pair[NUM_WORDS<<1];
+        for (int i = 0; i < NUM_WORDS; i++) {
+            pairs[i] = new Pair(0, i);
+			pairs[NUM_WORDS+i] = new Pair(1, i);
+		}
+		
 
-            String[] versions = args.clone();
+		String[] versions = args.clone();
             
             // Run test case for each version of the trie.
         for (String version : versions) {

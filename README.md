@@ -25,13 +25,14 @@ You can run the test cases two different ways:
 1. Run the Jupyter Notebook
 	- CAUTION: The Jupyter Notebook does make some system calls within the the ThreadedTries directory to read files and delete .class files. If you are not okay with this happening on your machine, you can either run it on a VM or just look at the last run currently in the notebook.
 
-	- In the third cell there is a variable named "number". This is the test case that is 	being ran. You can either make this 1 or 2 as there are only two test cases.
+	- In the third cell there is a variable named `number`. This is the test case that is 	being ran. You can either make this 1 or 2 as there are only two test cases.
+	- Also in the third cell, there is a variable named `test_cases`. This is the number of times the test case gets ran. It must be at least 1, but you can set the number as high as you wish (within reason)
 
 2. Compile and run the java test cases from command line
-	- Note: This will not produce any graphs, but there is some output to the terminal to indicate something is actually happening as well as a text file that shows the runtime in milliseconds paired with the number of threads. This is also a one and done testcase.
+	**Note**: This will not produce any graphs, but there is some output to the terminal to indicate something is actually happening as well as a text file that shows the runtime in milliseconds paired with the number of threads. This is also a one and done testcase.
 
 	1. Navigate to the ThreadedTries directory in terminal.
 	2. Compile: `javac testing/TrieTest1.java` or `javac testing/TrieTest2.java`
 	3. This file takes command line arguments. You must include at least one of the trie implementations as 	a command line argument. You may include up to all three.
 	4. Run: `java testing/TrieTest1 Optimistic FineGrain WaitFree` or `java testing/TrieTest2 Optimistic FineGrain WaitFree`
-	- This will do one run for all three implementations, and produce three separate text files displaying the results.
+		- This will do one run for all three implementations, and produce three separate text files displaying the results.

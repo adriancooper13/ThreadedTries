@@ -1,12 +1,12 @@
 package testing;
 
-import testing.all_tests.*;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import testing.all_tests.*;
 import tries.*;
 
 public class TrieTest1 {

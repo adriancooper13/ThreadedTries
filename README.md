@@ -38,4 +38,4 @@ You can run the test cases two different ways:
 		- ```java testing/TrieTest1 Optimistic FineGrain WaitFree```
 		or
 		- ```java testing/TrieTest2 Optimistic FineGrain WaitFree```
-			- This will do one run for all three implementations, and produce three separate text files displaying the results.
+		- This will do one run for all three implementations, and produce three separate text files displaying the results.

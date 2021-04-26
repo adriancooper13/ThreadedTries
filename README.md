@@ -35,7 +35,7 @@ You can run the test cases two different ways:
 	2. Compile: `javac testing/TrieTest1.java` or `javac testing/TrieTest2.java`
 	3. This file takes command line arguments. You must include at least one of the trie implementations as 	a command line argument. You may include up to all three.
 	4. Run: 
-		```java testing/TrieTest1 Optimistic FineGrain WaitFree```
+		- ```java testing/TrieTest1 Optimistic FineGrain WaitFree```
 		or
-		```java testing/TrieTest2 Optimistic FineGrain WaitFree```
-		- This will do one run for all three implementations, and produce three separate text files displaying the results.
+		- ```java testing/TrieTest2 Optimistic FineGrain WaitFree```
+			- This will do one run for all three implementations, and produce three separate text files displaying the results.
